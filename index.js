@@ -38,17 +38,36 @@ function playRound(humanChoice, computerChoice){
 
 let humanSelection;
 let computerSelection;
+const score = document.querySelector("div")
 
 
-function playGame() {
-    for(let i=0;i<5;i++){
-        humanSelection = getHumanChoice();
+function playGame(humanSelection) {
+    if(humanScore < 5 && computerScore < 5){
         computerSelection = getComputerChoice();
-        console.log(humanSelection)
-        console.log(computerSelection)
+        score.innerText(`Human: ${humanScore}   Computer: ${computerScore}`)
+        console.log("human choice: " + humanSelection)
+        console.log("computer choice: " + computerSelection)
         playRound(humanSelection, computerSelection);
         console.log(`Scoreboard:\nCoumputer:${computerScore}    Human:${humanScore}`)
     }
 }
 
-playGame()
+
+const btns = document.querySelectorAll("button")
+
+btns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        if (e.target.className == 'r')
+            humanSelection = "rock"
+        else if(e.target.className == 'p')
+            humanSelection = "paper"
+        else
+            humanSelection = "scissors"
+        playGame(humanSelection)
+    })
+})
+
+
+
+
+// playGame()
